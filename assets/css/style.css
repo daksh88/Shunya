@@ -1,6 +1,4 @@
-/* Main styles for the eCommerce store */
 
-/* Add Google Fonts import at the top of your CSS file */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&display=swap');
 
 :root {
@@ -27,7 +25,6 @@ body {
     color: #333;
 }
 
-/* Navigation Styles */
 .navbar {
     position: fixed;
     width: 100%;
@@ -73,6 +70,7 @@ body {
     letter-spacing: 2px;
     background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
 }
