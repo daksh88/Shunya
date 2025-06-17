@@ -6,18 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
         offset: 100
     });
 
-    // Handle newsletter form submission
-    const form = document.querySelector('.subscribe-form');
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const input = this.querySelector('input');
-            if (input.value) {
-                this.innerHTML = '<p class="success">Thank you for subscribing!</p>';
-            }
-        });
-    }
-
     // Add parallax effect to slideshow
     const slideshowItems = document.querySelectorAll('.slideshow-item');
     if (slideshowItems.length > 0) {
@@ -27,17 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
             slideshowItems.forEach(item => {
                 item.style.transform = `translate(${moveX}px, ${moveY}px)`;
             });
-        });
-    }
-
-  
-    // Glitch effect on hover
-    const glitchText = document.querySelector('.glitch');
-    if (glitchText) {
-        glitchText.addEventListener('mouseover', () => {
-            glitchText.style.animation = 'none';
-            void glitchText.offsetWidth;
-            glitchText.style.animation = 'glitch 725ms infinite';
         });
     }
 
