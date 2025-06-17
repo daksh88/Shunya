@@ -1,53 +1,51 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize AOS animation library
+    AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100
+    });
 
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+    // Handle newsletter form submission
+    const form = document.querySelector('.subscribe-form');
+    if (form) {
+        form.addEventListener('submit', function(e) {
             e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
+            const input = this.querySelector('input');
+            if (input.value) {
+                this.innerHTML = '<p class="success">Thank you for subscribing!</p>';
+            }
+        });
+    }
+
+    // Add parallax effect to slideshow
+    const slideshowItems = document.querySelectorAll('.slideshow-item');
+    if (slideshowItems.length > 0) {
+        document.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+            const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+            slideshowItems.forEach(item => {
+                item.style.transform = `translate(${moveX}px, ${moveY}px)`;
             });
         });
-    });
-
-    let cartItems = [];
-    
-    function addToCart(item) {
-        cartItems.push(item);
-        updateCartCount();
     }
 
-    function updateCartCount() {
-        
-        const cartCount = document.querySelector('.cart-count');
-        if (cartCount) {
-            cartCount.textContent = cartItems.length;
-        }
+  
+    // Glitch effect on hover
+    const glitchText = document.querySelector('.glitch');
+    if (glitchText) {
+        glitchText.addEventListener('mouseover', () => {
+            glitchText.style.animation = 'none';
+            void glitchText.offsetWidth;
+            glitchText.style.animation = 'glitch 725ms infinite';
+        });
     }
 
-    const burger = document.querySelector('.burger');
-    const nav = document.querySelector('.nav-links');
-    const navLinks = document.querySelectorAll('.nav-links li');
-
-
-    burger.addEventListener('click', (e) => {
-        e.stopPropagation();
-        nav.classList.toggle('active');
-        burger.classList.toggle('toggle');
-    });
-
-
-    document.addEventListener('click', (e) => {
-        if (!nav.contains(e.target) && !burger.contains(e.target) && nav.classList.contains('active')) {
-            nav.classList.remove('active');
-            burger.classList.remove('toggle');
-        }
-    });
-
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && nav.classList.contains('active')) {
-            nav.classList.remove('active');
-            burger.classList.remove('toggle');
-        }
-    });
+    // Add letter animation for coming soon text
+    const comingSoonSpans = document.querySelectorAll('.coming-soon-text span');
+    if (comingSoonSpans.length > 0) {
+        comingSoonSpans.forEach((span, index) => {
+            span.style.animationDelay = `${index * 0.2}s`;
+        });
+    }
 });
