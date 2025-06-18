@@ -27,9 +27,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Particles.js for fire ashes (higher density, no lines)
     if (window.particlesJS) {
+        // Bottom left ashes
         particlesJS('fire-ashes', {
             particles: {
-                number: { value: 90, density: { enable: true, value_area: 300 } },
+                number: { value: 180, density: { enable: true, value_area: 200 } }, // more dense
                 color: { value: "#ffae42" },
                 shape: { type: "circle" },
                 opacity: { value: 0.7, random: true },
@@ -38,6 +39,28 @@ document.addEventListener('DOMContentLoaded', function() {
                     enable: true,
                     speed: 2,
                     direction: "top-right",
+                    random: true,
+                    straight: false,
+                    out_mode: "out"
+                },
+                line_linked: { enable: false }
+            },
+            interactivity: { detect_on: "canvas", events: { onhover: { enable: false } } },
+            retina_detect: true
+        });
+
+        // Top right ashes
+        particlesJS('fire-ashes-top', {
+            particles: {
+                number: { value: 180, density: { enable: true, value_area: 200 } }, // more dense
+                color: { value: "#ffae42" },
+                shape: { type: "circle" },
+                opacity: { value: 0.7, random: true },
+                size: { value: 3, random: true },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "bottom-left",
                     random: true,
                     straight: false,
                     out_mode: "out"
@@ -73,6 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // (No need to load it anymore)
 
     // Typewriter effect for "Coming" and "soon" on two lines, then "SHUNYA"
+    // Example for two lines: "Coming" (line1), "soon" (line2), then "SHUNYA" (line1)
     const line1 = document.getElementById('typewriter-line1');
     const line2 = document.getElementById('typewriter-line2');
     if (line1 && line2) {
@@ -83,40 +107,31 @@ document.addEventListener('DOMContentLoaded', function() {
         let seqIndex = 0;
         let charIndex1 = 0;
         let charIndex2 = 0;
-        let isDeleting = false;
-        let typingSpeed = 100;
-        let pauseAfterTyping = 1200;
-        let pauseAfterDeleting = 500;
+
+        const typingSpeed = 60;
+        const pauseAfterTyping = 2000; // 2 seconds
 
         function type() {
             const current = sequences[seqIndex];
-            if (!isDeleting) {
-                if (charIndex1 < current.line1.length) {
-                    line1.textContent = current.line1.substring(0, charIndex1 + 1);
-                    charIndex1++;
-                    setTimeout(type, typingSpeed);
-                } else if (charIndex2 < current.line2.length) {
-                    line2.textContent = current.line2.substring(0, charIndex2 + 1);
-                    charIndex2++;
-                    setTimeout(type, typingSpeed);
-                } else {
-                    isDeleting = true;
-                    setTimeout(type, pauseAfterTyping);
-                }
+
+            if (charIndex1 < current.line1.length) {
+                line1.textContent = current.line1.substring(0, charIndex1 + 1);
+                charIndex1++;
+                setTimeout(type, typingSpeed);
+            } else if (charIndex2 < current.line2.length) {
+                line2.textContent = current.line2.substring(0, charIndex2 + 1);
+                charIndex2++;
+                setTimeout(type, typingSpeed);
             } else {
-                if (charIndex2 > 0) {
-                    line2.textContent = current.line2.substring(0, charIndex2 - 1);
-                    charIndex2--;
-                    setTimeout(type, typingSpeed / 2);
-                } else if (charIndex1 > 0) {
-                    line1.textContent = current.line1.substring(0, charIndex1 - 1);
-                    charIndex1--;
-                    setTimeout(type, typingSpeed / 2);
-                } else {
-                    isDeleting = false;
+                // Pause with text visible, then instantly switch to next text
+                setTimeout(() => {
                     seqIndex = (seqIndex + 1) % sequences.length;
-                    setTimeout(type, pauseAfterDeleting);
-                }
+                    charIndex1 = 0;
+                    charIndex2 = 0;
+                    line1.textContent = "";
+                    line2.textContent = "";
+                    type();
+                }, pauseAfterTyping);
             }
         }
         type();
