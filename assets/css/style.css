@@ -700,3 +700,35 @@
     background: linear-gradient(135deg, #0d0d0d 0%, #181818 40%, #2c1a0b 70%, #ff6600 100%) !important;
     /* #0d0d0d: deep black, #181818: dark gray, #2c1a0b: dark brown, #ff6600: fire orange */
 }
+
+#cube-container {
+    position: fixed;
+    top: 50%;
+    left: 65%;
+    transform: translateY(-50%);
+    width: 240px;
+    height: 240px;
+    z-index: 1000 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid red; /* TEMP: for debugging */
+    background: rgba(255,255,255,0.1); /* TEMP: for debugging */
+}
+
+.overlay,
+#fire-background,
+#fire-lottie,
+#fire-ashes,
+#fire-ashes-top,
+#fire-flash {
+    z-index: 1 !important;
+}
+
+@media (max-width: 600px) {
+    #cube-container {
+        width: 180px;
+        height: 180px;
+        top: 1rem;
+    }
+}
