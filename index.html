@@ -22,84 +22,13 @@
     <div id="fire-flash"></div>
     <div id="fire-background"></div>
     <div class="typewriter-container">
-        <span id="typewriter-line1"></span><br>
-        <span id="typewriter-line2"></span>
+        <span id="fire-text"></span>
     </div>
     <div id="cube-container"></div>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="./assets/js/main.js"></script>
-    <script type="module">
-import * as THREE from 'https://unpkg.com/three@0.153.0/build/three.module.js';
-import { OrbitControls } from 'https://unpkg.com/three@0.153.0/examples/jsm/controls/OrbitControls.js';
-
-const cubeDiv = document.getElementById('cube-container');
-const width = cubeDiv.offsetWidth || 240;
-const height = cubeDiv.offsetHeight || 240;
-
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-camera.position.z = 3;
-
-const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-renderer.setSize(width, height);
-cubeDiv.appendChild(renderer.domElement);
-
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
-controls.dampingFactor = 0.08;
-controls.enableZoom = false;
-controls.enablePan = false;
-controls.rotateSpeed = 0.7;
-
-// Lighting
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
-scene.add(ambientLight);
-const pointLight = new THREE.PointLight(0xffffff, 0.8);
-pointLight.position.set(5, 5, 5);
-scene.add(pointLight);
-
-// Load the logo texture and create the cube
-const loader = new THREE.TextureLoader();
-loader.load('./components/images/Brown Chic Clothing Store Logo.png', function(texture) {
-    const materials = [];
-    for (let i = 0; i < 6; i++) {
-        materials.push(new THREE.MeshPhysicalMaterial({
-            map: texture,
-            metalness: 0.8,
-            roughness: 0.2,
-            transparent: false,
-            opacity: 1,
-            reflectivity: 1,
-            clearcoat: 1,
-            clearcoatRoughness: 0.05,
-            ior: 1.5
-        }));
-    }
-    const geometry = new THREE.BoxGeometry(1.3, 1.3, 1.3);
-    const cube = new THREE.Mesh(geometry, materials);
-    scene.add(cube);
-
-    // Animation loop (auto-rotate + user control)
-    function animateCube() {
-        requestAnimationFrame(animateCube);
-        cube.rotation.y += 0.005; // slow auto-rotation
-        controls.update();
-        renderer.render(scene, camera);
-    }
-    animateCube();
-
-    // Responsive resize
-    window.addEventListener('resize', () => {
-        const rect = cubeDiv.getBoundingClientRect();
-        const newWidth = rect.width || 240;
-        const newHeight = rect.height || 240;
-        renderer.setSize(newWidth, newHeight);
-        camera.aspect = newWidth / newHeight;
-        camera.updateProjectionMatrix();
-    });
-});
-</script>
+    
 </body>
 </html>
