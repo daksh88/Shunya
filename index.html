@@ -5,11 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shunya - Coming Soon</title>
     <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/three@0.154.0/build/three.min.js"></script>
 </head>
 <body>
-    <video autoplay loop muted playsinline id="bg-video">
-        <source src="./assets/video/video.mp4" type="video/mp4">
+    <video autoplay muted playsinline id="bg-video">
+        <source src="./assets/video/video.mp4" type="video/mp4" media="(min-width: 600px)">
+        <source src="./assets/video/video2.mp4" type="video/mp4" media="(max-width: 599px)">
         Your browser does not support the video tag.
     </video>
+    <audio id="bg-audio" src="./assets/audio/tank-exploder-lance-conrad-cinematic-music_SbhrLyRZ.mp3" loop></audio>
+    <script>
+        // Toggle audio play/pause on each click
+        document.addEventListener('click', function toggleAudio() {
+            var audio = document.getElementById('bg-audio');
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        });
+    </script>
 </body>
 </html>

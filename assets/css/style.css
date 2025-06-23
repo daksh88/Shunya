@@ -10,3 +10,14 @@
     z-index: -1;
     pointer-events: none;
 }
+
+/* Responsive adjustments for mobile */
+@media (max-width: 599px) {
+    #bg-video {
+        min-width: 100vw;
+        min-height: 100vh;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+    }
+}
